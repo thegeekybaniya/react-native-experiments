@@ -40,6 +40,10 @@ export const DraggableZoomable: React.FC<DraggableZoomableProps> = ({
   const scale = useSharedValue(initialScale);
   const savedScale = useSharedValue(initialScale);
 
+  // Current and saved rotation (in radians)
+  const rotation = useSharedValue(0);
+  const savedRotation = useSharedValue(0);
+
   // Remember position when dragging starts (so we can add to it, not replace it)
   const savedTranslateX = useSharedValue(0);
   const savedTranslateY = useSharedValue(0);
@@ -91,6 +95,21 @@ export const DraggableZoomable: React.FC<DraggableZoomableProps> = ({
       scale.value = withSpring(scale.value);
     });
 
+  // ROTATION: This handles when someone rotates with two fingers
+  const rotationGesture = Gesture.Rotation()
+    .onStart(() => {
+      // Remember how rotated we were when rotation started
+      savedRotation.value = rotation.value;
+    })
+    .onUpdate((event) => {
+      // Add the rotation amount to our saved rotation
+      rotation.value = savedRotation.value + event.rotation;
+    })
+    .onEnd(() => {
+      // Add a smooth spring animation when rotation stops
+      rotation.value = withSpring(rotation.value);
+    });
+
   // DOUBLE TAP: This handles when someone taps twice quickly
   const doubleTapGesture = Gesture.Tap()
     .numberOfTaps(2)
@@ -100,16 +119,18 @@ export const DraggableZoomable: React.FC<DraggableZoomableProps> = ({
         scale.value = withSpring(initialScale);
         translateX.value = withSpring(0);
         translateY.value = withSpring(0);
+        rotation.value = withSpring(0);
       } else {
         // If we're at normal size, double tap zooms in to 70% of max zoom
         scale.value = withSpring(maxScale * 0.7);
       }
     });
 
-  // COMBINE ALL GESTURES: Allow dragging, pinching, and double-tapping at the same time
+  // COMBINE ALL GESTURES: Allow dragging, pinching, rotating, and double-tapping at the same time
   const composedGesture = Gesture.Simultaneous(
     panGesture,
     pinchGesture,
+    rotationGesture,
     doubleTapGesture
   );
 
@@ -120,6 +141,7 @@ export const DraggableZoomable: React.FC<DraggableZoomableProps> = ({
         { translateX: translateX.value },
         { translateY: translateY.value },
         { scale: scale.value },
+        { rotate: `${rotation.value}rad` },
       ],
     };
   });
