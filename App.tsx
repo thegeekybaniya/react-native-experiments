@@ -3,8 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DragZoomExperiment } from './experiments/DragZoomExperiment';
+import { SwipeCardsExperiment } from './experiments/SwipeCardsExperiment';
 
-type Screen = 'home' | 'dragZoom';
+type Screen = 'home' | 'dragZoom' | 'swipeCards';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -25,6 +26,16 @@ export default function App() {
               Interactive draggable and zoomable object with gestures
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[styles.experimentButton, { borderLeftColor: '#FF6B6B' }]}
+            onPress={() => setCurrentScreen('swipeCards')}
+          >
+            <Text style={styles.experimentTitle}>Swipe Cards</Text>
+            <Text style={styles.experimentDescription}>
+              Tinder-like swipe interface with smooth animations
+            </Text>
+          </TouchableOpacity>
           
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
@@ -42,6 +53,8 @@ export default function App() {
     switch (currentScreen) {
       case 'dragZoom':
         return <DragZoomExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'swipeCards':
+        return <SwipeCardsExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }
