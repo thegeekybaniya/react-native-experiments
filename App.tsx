@@ -5,8 +5,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DragZoomExperiment } from './experiments/DragZoomExperiment';
 import { SwipeCardsExperiment } from './experiments/SwipeCardsExperiment';
 import { CardDeckExperiment } from './experiments/CardDeckExperiment';
+import { ThreeCupMonteExperiment } from './experiments/ThreeCupMonteExperiment';
+import { ThreeCupMonte3DExperiment } from './experiments/ThreeCupMonte3DExperiment';
 
-type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck';
+type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -48,6 +50,26 @@ export default function App() {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#E67E22' }]}
+            onPress={() => setCurrentScreen('threeCupMonte')}
+          >
+            <Text style={styles.experimentTitle}>Three Cup Monte</Text>
+            <Text style={styles.experimentDescription}>
+              Classic shell game with animated cup shuffling and ball tracking
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#9B59B6' }]}
+            onPress={() => setCurrentScreen('threeCupMonte3D')}
+          >
+            <Text style={styles.experimentTitle}>Three Cup Monte 3D</Text>
+            <Text style={styles.experimentDescription}>
+              Enhanced shell game with curved 2D animations, lift effects, and realistic movement
+            </Text>
+          </TouchableOpacity>
+
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
             <Text style={[styles.experimentTitle, styles.comingSoonText]}>More Coming Soon</Text>
@@ -68,6 +90,10 @@ export default function App() {
         return <SwipeCardsExperiment onBack={() => setCurrentScreen('home')} />;
       case 'cardDeck':
         return <CardDeckExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'threeCupMonte':
+        return <ThreeCupMonteExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'threeCupMonte3D':
+        return <ThreeCupMonte3DExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }
