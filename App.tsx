@@ -4,8 +4,9 @@ import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-na
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DragZoomExperiment } from './experiments/DragZoomExperiment';
 import { SwipeCardsExperiment } from './experiments/SwipeCardsExperiment';
+import { CardDeckExperiment } from './experiments/CardDeckExperiment';
 
-type Screen = 'home' | 'dragZoom' | 'swipeCards';
+type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -15,9 +16,9 @@ export default function App() {
       <View style={styles.homeContent}>
         <Text style={styles.title}>React Native Experiments</Text>
         <Text style={styles.subtitle}>Tap an experiment to try it out</Text>
-        
+
         <View style={styles.experimentsGrid}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.experimentButton}
             onPress={() => setCurrentScreen('dragZoom')}
           >
@@ -27,7 +28,7 @@ export default function App() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.experimentButton, { borderLeftColor: '#FF6B6B' }]}
             onPress={() => setCurrentScreen('swipeCards')}
           >
@@ -36,7 +37,17 @@ export default function App() {
               Tinder-like swipe interface with smooth animations
             </Text>
           </TouchableOpacity>
-          
+
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#4ECDC4' }]}
+            onPress={() => setCurrentScreen('cardDeck')}
+          >
+            <Text style={styles.experimentTitle}>Card Deck</Text>
+            <Text style={styles.experimentDescription}>
+              Cycling card deck with depth, scaling, and smooth transitions
+            </Text>
+          </TouchableOpacity>
+
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
             <Text style={[styles.experimentTitle, styles.comingSoonText]}>More Coming Soon</Text>
@@ -55,6 +66,8 @@ export default function App() {
         return <DragZoomExperiment onBack={() => setCurrentScreen('home')} />;
       case 'swipeCards':
         return <SwipeCardsExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'cardDeck':
+        return <CardDeckExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }
