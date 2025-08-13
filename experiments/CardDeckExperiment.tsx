@@ -33,12 +33,43 @@ interface CardData {
     emoji: string;
 }
 
+// Example credit card data for the deck
 const DECK_CARDS: CardData[] = [
-    { id: 1, title: 'React Native', subtitle: 'Cross-platform mobile development', color: '#61DAFB', emoji: '📱' },
-    { id: 2, title: 'TypeScript', subtitle: 'Typed JavaScript for better code', color: '#3178C6', emoji: '🔷' },
-    { id: 3, title: 'Reanimated', subtitle: 'Smooth 60fps animations', color: '#4ECDC4', emoji: '✨' },
-    { id: 4, title: 'Gesture Handler', subtitle: 'Native gesture recognition', color: '#FF6B6B', emoji: '👆' },
-    { id: 5, title: 'Expo', subtitle: 'Development platform & tools', color: '#000020', emoji: '🚀' },
+    {
+        id: 1,
+        title: 'Visa Platinum',
+        subtitle: '**** 1234  Exp: 12/26',
+        color: '#1A1F71', // Visa blue
+        emoji: '💳', // Credit card emoji
+    },
+    {
+        id: 2,
+        title: 'Mastercard Gold',
+        subtitle: '**** 5678  Exp: 09/25',
+        color: '#F79E1B', // Mastercard orange
+        emoji: '🏦', // Bank emoji
+    },
+    {
+        id: 3,
+        title: 'American Express',
+        subtitle: '**** 9012  Exp: 03/27',
+        color: '#2E77BB', // Amex blue
+        emoji: '🛡️', // Shield emoji
+    },
+    {
+        id: 4,
+        title: 'Discover Cashback',
+        subtitle: '**** 3456  Exp: 07/24',
+        color: '#FF6000', // Discover orange
+        emoji: '💰', // Money bag emoji
+    },
+    {
+        id: 5,
+        title: 'Apple Card',
+        subtitle: '**** 7890  Exp: 11/28',
+        color: '#E5E5EA', // Apple Card silver/white
+        emoji: '🍏', // Apple emoji
+    },
 ];
 
 const DeckCard: React.FC<{

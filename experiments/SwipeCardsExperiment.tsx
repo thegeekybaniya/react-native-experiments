@@ -34,12 +34,12 @@ interface CardData {
 // Here's our deck of cards with some cool tech topics
 // Think of this like a stack of trading cards, but for programming stuff!
 const SAMPLE_CARDS: CardData[] = [
-    { id: 1, title: 'React Native', subtitle: 'Mobile development framework', color: '#61DAFB', emoji: '📱' },
-    { id: 2, title: 'TypeScript', subtitle: 'Typed JavaScript superset', color: '#3178C6', emoji: '🔷' },
-    { id: 3, title: 'Expo', subtitle: 'React Native development platform', color: '#000020', emoji: '🚀' },
-    { id: 4, title: 'Gesture Handler', subtitle: 'Native gesture recognition', color: '#FF6B6B', emoji: '�' },
-    { id: 5, title: 'Reanimated', subtitle: 'Smooth animations library', color: '#4ECDC4', emoji: '✨' },
-    { id: 6, title: 'JavaScript', subtitle: 'Programming language of the web', color: '#F7DF1E', emoji: '⚡' },
+    { id: 1, title: 'Bella', subtitle: 'Golden Retriever • 3 years old', color: '#FFD700', emoji: '🐶' },
+    { id: 2, title: 'Milo', subtitle: 'Tabby Cat • 2 years old', color: '#FFB6C1', emoji: '🐱' },
+    { id: 3, title: 'Charlie', subtitle: 'Cockatiel • 1 year old', color: '#B0E0E6', emoji: '🐦' },
+    { id: 4, title: 'Luna', subtitle: 'Holland Lop Rabbit • 4 years old', color: '#E6E6FA', emoji: '🐰' },
+    { id: 5, title: 'Max', subtitle: 'Bearded Dragon • 5 years old', color: '#F4A460', emoji: '🦎' },
+    { id: 6, title: 'Daisy', subtitle: 'Guinea Pig • 2 years old', color: '#98FB98', emoji: '🐹' },
 ];
 
 // This is a single swipeable card component - like one card in a deck

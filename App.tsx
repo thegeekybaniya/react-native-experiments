@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DragZoomExperiment } from './experiments/DragZoomExperiment';
 import { SwipeCardsExperiment } from './experiments/SwipeCardsExperiment';
 import { CardDeckExperiment } from './experiments/CardDeckExperiment';
 import { ThreeCupMonteExperiment } from './experiments/ThreeCupMonteExperiment';
 import { ThreeCupMonte3DExperiment } from './experiments/ThreeCupMonte3DExperiment';
+import { DrawingCanvasExperiment } from './experiments/DrawingCanvasExperiment';
 
-type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D';
+type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -19,7 +20,11 @@ export default function App() {
         <Text style={styles.title}>React Native Experiments</Text>
         <Text style={styles.subtitle}>Tap an experiment to try it out</Text>
 
-        <View style={styles.experimentsGrid}>
+        <ScrollView 
+          style={styles.scrollContainer}
+          contentContainerStyle={styles.experimentsGrid}
+          showsVerticalScrollIndicator={false}
+        >
           <TouchableOpacity
             style={styles.experimentButton}
             onPress={() => setCurrentScreen('dragZoom')}
@@ -70,6 +75,16 @@ export default function App() {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#28a745' }]}
+            onPress={() => setCurrentScreen('drawingCanvas')}
+          >
+            <Text style={styles.experimentTitle}>Drawing Canvas</Text>
+            <Text style={styles.experimentDescription}>
+              Interactive drawing canvas with persistence, colors, and tools
+            </Text>
+          </TouchableOpacity>
+
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
             <Text style={[styles.experimentTitle, styles.comingSoonText]}>More Coming Soon</Text>
@@ -77,7 +92,7 @@ export default function App() {
               Future experiments will appear here
             </Text>
           </View>
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -94,6 +109,8 @@ export default function App() {
         return <ThreeCupMonteExperiment onBack={() => setCurrentScreen('home')} />;
       case 'threeCupMonte3D':
         return <ThreeCupMonte3DExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'drawingCanvas':
+        return <DrawingCanvasExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }
@@ -114,8 +131,13 @@ const styles = StyleSheet.create({
   },
   homeContent: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
     alignItems: 'center',
+  },
+  scrollContainer: {
+    flex: 1,
+    width: '100%',
   },
   title: {
     fontSize: 28,
@@ -131,9 +153,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   experimentsGrid: {
-    flex: 1,
     width: '100%',
     maxWidth: 400,
+    alignSelf: 'center',
+    paddingBottom: 20,
   },
   experimentButton: {
     backgroundColor: '#fff',
