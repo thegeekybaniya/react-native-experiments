@@ -66,6 +66,9 @@ This is my personal playground for trying out new things in React Native. Here y
 - **Pinterest Style**  
   Masonry grid layout with infinite scroll, pull-to-refresh, and modal image viewing.
 
+- **Swipe Modals**  
+  Multi-directional modal system with gesture-based interactions from all screen edges.
+
 ---
 
 Feel free to poke around, run the experiments, or use the code for your own learning!

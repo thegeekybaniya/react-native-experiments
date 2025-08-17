@@ -10,8 +10,9 @@ import { ThreeCupMonte3DExperiment } from './experiments/ThreeCupMonte3DExperime
 import { DrawingCanvasExperiment } from './experiments/DrawingCanvasExperiment';
 import { AnalogClockExperiment } from './experiments/AnalogClockExperiment';
 import { PinterestStyleExperiment } from './experiments/PinterestStyleExperiment';
+import { SwipeModalsExperiment } from './experiments/SwipeModalsExperiment';
 
-type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas' | 'analogClock' | 'pinterestStyle';
+type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas' | 'analogClock' | 'pinterestStyle' | 'swipeModals';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -107,6 +108,16 @@ export default function App() {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#9c27b0' }]}
+            onPress={() => setCurrentScreen('swipeModals')}
+          >
+            <Text style={styles.experimentTitle}>Swipe Modals</Text>
+            <Text style={styles.experimentDescription}>
+              Multi-directional modal system with gesture-based interactions
+            </Text>
+          </TouchableOpacity>
+
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
             <Text style={[styles.experimentTitle, styles.comingSoonText]}>More Coming Soon</Text>
@@ -137,6 +148,8 @@ export default function App() {
         return <AnalogClockExperiment onBack={() => setCurrentScreen('home')} />;
       case 'pinterestStyle':
         return <PinterestStyleExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'swipeModals':
+        return <SwipeModalsExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }
