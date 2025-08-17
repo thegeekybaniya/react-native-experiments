@@ -8,8 +8,9 @@ import { CardDeckExperiment } from './experiments/CardDeckExperiment';
 import { ThreeCupMonteExperiment } from './experiments/ThreeCupMonteExperiment';
 import { ThreeCupMonte3DExperiment } from './experiments/ThreeCupMonte3DExperiment';
 import { DrawingCanvasExperiment } from './experiments/DrawingCanvasExperiment';
+import { AnalogClockExperiment } from './experiments/AnalogClockExperiment';
 
-type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas';
+type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas' | 'analogClock';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -85,6 +86,16 @@ export default function App() {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#f39c12' }]}
+            onPress={() => setCurrentScreen('analogClock')}
+          >
+            <Text style={styles.experimentTitle}>Analog Clock</Text>
+            <Text style={styles.experimentDescription}>
+              Interactive analog clock with real-time updates and manual time setting
+            </Text>
+          </TouchableOpacity>
+
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
             <Text style={[styles.experimentTitle, styles.comingSoonText]}>More Coming Soon</Text>
@@ -111,6 +122,8 @@ export default function App() {
         return <ThreeCupMonte3DExperiment onBack={() => setCurrentScreen('home')} />;
       case 'drawingCanvas':
         return <DrawingCanvasExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'analogClock':
+        return <AnalogClockExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }

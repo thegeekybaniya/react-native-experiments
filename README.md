@@ -60,6 +60,9 @@ This is my personal playground for trying out new things in React Native. Here y
 - **Drawing Canvas**  
   Simple drawing app with color/brush selection and persistent storage.
 
+- **Analog Clock**  
+  Interactive analog clock with real-time updates and manual time setting via gestures.
+
 ---
 
 Feel free to poke around, run the experiments, or use the code for your own learning!
