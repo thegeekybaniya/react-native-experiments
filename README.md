@@ -63,6 +63,9 @@ This is my personal playground for trying out new things in React Native. Here y
 - **Analog Clock**  
   Interactive analog clock with real-time updates and manual time setting via gestures.
 
+- **Pinterest Style**  
+  Masonry grid layout with infinite scroll, pull-to-refresh, and modal image viewing.
+
 ---
 
 Feel free to poke around, run the experiments, or use the code for your own learning!

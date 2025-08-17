@@ -9,8 +9,9 @@ import { ThreeCupMonteExperiment } from './experiments/ThreeCupMonteExperiment';
 import { ThreeCupMonte3DExperiment } from './experiments/ThreeCupMonte3DExperiment';
 import { DrawingCanvasExperiment } from './experiments/DrawingCanvasExperiment';
 import { AnalogClockExperiment } from './experiments/AnalogClockExperiment';
+import { PinterestStyleExperiment } from './experiments/PinterestStyleExperiment';
 
-type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas' | 'analogClock';
+type Screen = 'home' | 'dragZoom' | 'swipeCards' | 'cardDeck' | 'threeCupMonte' | 'threeCupMonte3D' | 'drawingCanvas' | 'analogClock' | 'pinterestStyle';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -96,6 +97,16 @@ export default function App() {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[styles.experimentButton, { borderLeftColor: '#e91e63' }]}
+            onPress={() => setCurrentScreen('pinterestStyle')}
+          >
+            <Text style={styles.experimentTitle}>Pinterest Style</Text>
+            <Text style={styles.experimentDescription}>
+              Masonry grid layout with infinite scroll and modal image viewing
+            </Text>
+          </TouchableOpacity>
+
           {/* Placeholder for future experiments */}
           <View style={[styles.experimentButton, styles.comingSoon]}>
             <Text style={[styles.experimentTitle, styles.comingSoonText]}>More Coming Soon</Text>
@@ -124,6 +135,8 @@ export default function App() {
         return <DrawingCanvasExperiment onBack={() => setCurrentScreen('home')} />;
       case 'analogClock':
         return <AnalogClockExperiment onBack={() => setCurrentScreen('home')} />;
+      case 'pinterestStyle':
+        return <PinterestStyleExperiment onBack={() => setCurrentScreen('home')} />;
       default:
         return renderHomeScreen();
     }
