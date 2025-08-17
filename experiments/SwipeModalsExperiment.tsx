@@ -36,36 +36,20 @@ type ModalDirection = 'left' | 'right' | 'top' | 'bottom' | null;
 // Modal content data for each direction
 const MODAL_CONTENT = {
     left: {
-        title: 'Left Panel',
-        subtitle: 'Settings & Options',
-        icon: '⚙️',
-        content: 'This modal slides in from the left side. Perfect for navigation menus, settings panels, or sidebar content.',
+        title: 'Left',
         backgroundColor: '#4A90E2',
-        items: ['Profile Settings', 'App Preferences', 'Privacy Options', 'Account Details']
     },
     right: {
-        title: 'Right Panel',
-        subtitle: 'Quick Actions',
-        icon: '⚡',
-        content: 'This modal slides in from the right side. Great for quick actions, filters, or contextual tools.',
+        title: 'Right',
         backgroundColor: '#E94560',
-        items: ['Share Content', 'Quick Edit', 'Favorite Item', 'More Options']
     },
     top: {
-        title: 'Top Panel',
-        subtitle: 'Notifications',
-        icon: '🔔',
-        content: 'This modal slides down from the top. Ideal for notifications, alerts, or status updates.',
+        title: 'Top',
         backgroundColor: '#2ECC71',
-        items: ['New Message', 'System Update', 'Friend Request', 'Achievement Unlocked']
     },
     bottom: {
-        title: 'Bottom Panel',
-        subtitle: 'Action Sheet',
-        icon: '📋',
-        content: 'This modal slides up from the bottom. Perfect for action sheets, forms, or additional content.',
+        title: 'Bottom',
         backgroundColor: '#F39C12',
-        items: ['Add New Item', 'Upload Photo', 'Create Post', 'Scan QR Code']
     }
 };
 
@@ -290,26 +274,11 @@ export const SwipeModalsExperiment: React.FC<SwipeModalsExperimentProps> = ({ on
         
         return (
             <View style={[styles.modalContent, { backgroundColor: content.backgroundColor }]}>
-                <View style={styles.modalHeader}>
-                    <Text style={styles.modalIcon}>{content.icon}</Text>
-                    <View style={styles.modalTitleContainer}>
-                        <Text style={styles.modalTitle}>{content.title}</Text>
-                        <Text style={styles.modalSubtitle}>{content.subtitle}</Text>
-                    </View>
+                <View style={styles.simpleModalCenter}>
+                    <Text style={styles.simpleModalTitle}>{content.title}</Text>
                     <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
                         <Text style={styles.closeButtonText}>✕</Text>
                     </TouchableOpacity>
-                </View>
-                
-                <Text style={styles.modalDescription}>{content.content}</Text>
-                
-                <View style={styles.modalItems}>
-                    {content.items.map((item, index) => (
-                        <TouchableOpacity key={index} style={styles.modalItem}>
-                            <Text style={styles.modalItemText}>{item}</Text>
-                            <Text style={styles.modalItemArrow}>→</Text>
-                        </TouchableOpacity>
-                    ))}
                 </View>
             </View>
         );
@@ -612,32 +581,24 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         flex: 1,
-        padding: 20,
         paddingTop: 60, // Account for status bar
     },
-    modalHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 20,
-    },
-    modalIcon: {
-        fontSize: 32,
-        marginRight: 15,
-    },
-    modalTitleContainer: {
+    simpleModalCenter: {
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
     },
-    modalTitle: {
-        fontSize: 24,
+    simpleModalTitle: {
+        fontSize: 48,
         fontWeight: 'bold',
         color: '#fff',
-        marginBottom: 4,
-    },
-    modalSubtitle: {
-        fontSize: 16,
-        color: 'rgba(255, 255, 255, 0.8)',
+        textAlign: 'center',
     },
     closeButton: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
         width: 32,
         height: 32,
         borderRadius: 16,
@@ -648,33 +609,6 @@ const styles = StyleSheet.create({
     closeButtonText: {
         fontSize: 16,
         color: '#fff',
-        fontWeight: 'bold',
-    },
-    modalDescription: {
-        fontSize: 16,
-        color: 'rgba(255, 255, 255, 0.9)',
-        lineHeight: 24,
-        marginBottom: 30,
-    },
-    modalItems: {
-        gap: 12,
-    },
-    modalItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        padding: 16,
-        borderRadius: 12,
-    },
-    modalItemText: {
-        fontSize: 16,
-        color: '#fff',
-        fontWeight: '500',
-    },
-    modalItemArrow: {
-        fontSize: 16,
-        color: 'rgba(255, 255, 255, 0.7)',
         fontWeight: 'bold',
     },
 });
